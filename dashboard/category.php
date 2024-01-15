@@ -1,4 +1,6 @@
 <?php 
+include '../conection.php';
+
 
 include 'sidebar.php';
 
@@ -52,7 +54,40 @@ include 'sidebar.php';
 
 
 
+  <?php 
   
+  $select = "SELECT * FROM category ";
+
+  $query = mysqli_query($conn,$select);
+
+
+if (isset($_POST['delete_data'])){
+  $allId = $_POST['cat_id'];
+  $extract_id = implode(',',$allId);
+
+  // echo $extract_id;
+
+  $delete = "DELETE FROM category WHERE id IN( $extract_id)";
+
+  $query = mysqli_query($conn,$delete);
+
+if($query){
+
+  header("Location:category.php");
+}else{
+  echo '<script>
+
+  alert("Something went wrong")
+  </script>';
+}
+
+}
+
+
+  
+  ?>
+
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -68,6 +103,93 @@ include 'sidebar.php';
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
+
+<div class="container">
+<div class="row">
+  <div class="col-lg-12">
+    <a href="./add-cat.php" class="btn btn-primary m-3">Add New</a>
+  </div>
+</div>
+
+
+<form action="" method="POST">
+  <div class="row">
+    <div class="col-lg-12">
+    <table class="table">
+ 
+
+
+  <?php   
+  
+  while ($row = mysqli_fetch_array($query)){
+
+    if($row > 0){
+?>
+
+<thead>
+    <tr>
+      <th scope="col">SR.NO</th>
+      
+      <th scope="col">Category</th>
+      
+      
+      <th scope="col">Action</th>
+      <th scope="col"><button class="btn btn-danger" name="delete_data" >Delete</button></th>
+    </tr>
+  </thead>
+  <tbody>
+
+<tr>
+  <td ><?php echo $row['id'] ?></td>
+  <td><?php echo $row['cat_name'] ?></td>
+  <td><a class="btn btn-success" href="">Edit</a> </td>
+  
+  <td style="width:10px;"><input type="checkbox" name="cat_id[]" value="<?= $row['id'] ?>" class="single_check"></td>
+  
+      
+    </tr>
+
+<?php
+    }else {
+
+      ?>
+
+<!-- <tr>
+<td >no Data Found</td>
+<td>no Data Found </td>
+<td>no Data Found</td>
+
+
+</tr> -->
+
+<p>No Data </p>
+      <?php
+
+    }
+
+     
+  }
+  
+  
+  
+  ?>
+    <!-- <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+  
+      
+    </tr> -->
+  
+
+    
+  </tbody>
+</table>
+    </div>
+  </div>
+  </form>
+</div>
+
     </div>
     <!-- /.content-header -->
 
@@ -89,6 +211,27 @@ include 'footer.php';
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+
+<script>
+
+let checkmain = $('#checkmain')
+let checkall = $('.single_check')
+
+checkmain.change(function(){
+
+
+  if (checkmain.checked) {
+                console.log("Checkbox is checked");
+            } else {
+                console.log("Checkbox is unchecked");
+            }
+  
+});
+
+</script>
+
+
+
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->

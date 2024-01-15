@@ -38,6 +38,11 @@ if(isset($_POST['logout'])){
 }
 
 
+$page =basename ($_SERVER['PHP_SELF'], ".php");
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -77,10 +82,12 @@ if(isset($_POST['logout'])){
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="./docs/assets/img/logo.webp" alt="AdminLTELogo" height="60" width="150">
-  </div>
+  </div> -->
 
+
+  
   <!-- Navbar -->
   <!-- <nav class="main-header navbar navbar-expand navbar-white navbar-light"> -->
     <!-- Left navbar links -->
@@ -135,7 +142,7 @@ if(isset($_POST['logout'])){
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         
           <li class="nav-item">
-            <a href="admin.php" class="nav-link">
+            <a href="admin.php" class="nav-link <?=($page=="admin")?'active':'';?>">
               
               <p>
                 Dashboard
@@ -144,7 +151,7 @@ if(isset($_POST['logout'])){
           </li>
           
           <li class="nav-item">
-            <a href="category.php" class="nav-link">
+            <a href="category.php" class="nav-link  <?=($page=="category")?'active':'';?>">
               
               <p>
                 Category

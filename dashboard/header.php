@@ -1,4 +1,10 @@
 
+<?php 
+
+ob_start();
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +46,20 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
+    <?php 
+    
+
+
+    if(isset($_SESSION['msg'])){
+      $message = $_SESSION['msg'];
+      echo $message;
+      
+      unset($_SESSION['msg']);
+      // header("Location:add-cat.php");
+    }
+
+    
+    ?>
     
 
     <!-- Right navbar links -->

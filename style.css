@@ -42,3 +42,22 @@
     text-align: left;
 }
 
+
+
+.table {
+    border: 1px solid #c6c6c6;
+}
+
+.table thead th {
+    text-align: center;
+}
+
+.table tbody th {
+    text-align: center;
+    border: 1px solid #c6c6c6;
+}
+
+.table tbody td {
+    text-align: center;
+    border: 1px solid #c6c6c6;
+}
